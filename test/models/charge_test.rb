@@ -19,4 +19,10 @@ class ChargeTest < ActiveSupport::TestCase
       Charge.find_for_account(accounts(:jon), @charge.id)
     end
   end
+
+  test "record is read only after being created" do
+    assert_raises(ActiveRecord::ReadOnlyRecord) do
+      @charge.update(:amount_in_cents => 500)
+    end
+  end
 end

@@ -6,4 +6,8 @@ class Charge < ActiveRecord::Base
   def self.find_for_account(account, charge_id)
     all_for_account(account).find(charge_id)
   end
+
+  def readonly?
+    persisted?
+  end
 end
