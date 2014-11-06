@@ -25,7 +25,7 @@ ActiveRecord::Schema.define(version: 20141105203156) do
     t.datetime "created_at"
   end
 
-  add_index "charge_states", ["charge_id", "created_at"], name: "index_charge_states_on_charge_id_and_created_at", unique: true
+  add_index "charge_states", ["charge_id", "created_at"], name: "index_charge_states_on_charge_id_and_created_at", unique: true, using: :btree
 
   create_table "charges", force: true do |t|
     t.integer  "amount_in_cents"
