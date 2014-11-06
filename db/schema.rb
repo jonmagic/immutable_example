@@ -11,13 +11,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141105185810) do
+ActiveRecord::Schema.define(version: 20141105203156) do
 
   create_table "accounts", force: true do |t|
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "charge_states", force: true do |t|
+    t.integer  "charge_id"
+    t.integer  "state"
+    t.datetime "created_at"
+  end
+
+  add_index "charge_states", ["charge_id", "created_at"], name: "index_charge_states_on_charge_id_and_created_at", unique: true
 
   create_table "charges", force: true do |t|
     t.integer  "amount_in_cents"
