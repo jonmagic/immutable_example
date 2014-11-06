@@ -10,4 +10,16 @@ class ChargeStateTest < ActiveSupport::TestCase
       end
     end
   end
+
+  test "#in_progress? returns true when processing" do
+    assert charge_states(:state_processing_for_arthur).in_progress?
+  end
+
+  test "#in_progress? returns false when processed" do
+    refute charge_states(:state_processed_for_julia).in_progress?
+  end
+
+  test "#in_progress? returns false when failed" do
+    refute charge_states(:state_failed_for_jon).in_progress?
+  end
 end

@@ -17,4 +17,15 @@
   <%= @charge.created_at %>
 </p>
 
+<p>
+  <strong>Current state:</strong>
+  <%= @charge.state.state %>
+  <% if @charge.state.in_progress? %>
+    <br>
+    <%= link_to "Mark processed", processed_account_charge_path(@account, @charge), :method => :post %> |
+    <%= link_to "Mark failed", failed_account_charge_path(@account, @charge), :method => :post %>
+  <% end %>
+</p>
+
+
 <%= link_to 'Back to account', account_charges_path(@account) %>

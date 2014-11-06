@@ -3,9 +3,24 @@ class ChargeState < ActiveRecord::Base
 
   default_scope { order("created_at ASC") }
 
-  enum :states => {
+  enum :state => {
     :processing => 0,
     :processed  => 1,
     :failed     => 2
   }
+
+  def self.final_states
+    [
+      states[:processed],
+      states[:failed]
+    ]
+  end
+
+  def in_progress?
+    !finalized?
+  end
+
+  def finalized?
+    self.class.final_states.include?(read_attribute(:state))
+  end
 end

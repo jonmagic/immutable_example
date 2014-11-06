@@ -1,7 +1,12 @@
 Rails.application.routes.draw do
 
   resources :accounts do
-    resources :charges, :except => [:edit, :update, :destroy]
+    resources :charges, :except => [:edit, :update, :destroy] do
+      member do
+        post "processed"
+        post "failed"
+      end
+    end
   end
 
   root "accounts#index"

@@ -1,5 +1,6 @@
 class ChargesController < ApplicationController
   before_action :set_account
+  before_action :set_charge, :only => [:show, :processed, :failed]
 
   # GET /charges
   # GET /charges.json
@@ -10,7 +11,6 @@ class ChargesController < ApplicationController
   # GET /charges/1
   # GET /charges/1.json
   def show
-    @charge = Charge.find_for_account(@account, params[:id])
   end
 
   # GET /charges/new
@@ -37,7 +37,29 @@ class ChargesController < ApplicationController
     end
   end
 
+  def processed
+    @charge.processed!
+
+    respond_to do |format|
+      format.html { redirect_to account_charge_path(@account, @charge), notice: 'Charge was successfully processed.' }
+      format.json { render :show, status: :ok, location: @charge }
+    end
+  end
+
+  def failed
+    @charge.failed!
+
+    respond_to do |format|
+      format.html { redirect_to account_charge_path(@account, @charge), notice: 'Charge failed :(' }
+      format.json { render :show, status: :internal_server_error, location: @charge }
+    end
+  end
+
 private
+  def set_charge
+    @charge = Charge.find_for_account(@account, params[:id])
+  end
+
   def set_account
     @account = Account.find(params[:account_id])
   end
