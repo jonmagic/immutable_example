@@ -1,0 +1,26 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+state_processing_for_arthur:
+  charge: charge_for_arthur
+  state: <%= ChargeState.states[:processing] %>
+  created_at: 2014-11-05 09:49:05
+
+state_processing_for_julia:
+  charge: charge_for_julia
+  state: <%= ChargeState.states[:processing] %>
+  created_at: 2014-11-05 09:49:06
+
+state_processed_for_julia:
+  charge: charge_for_julia
+  state: <%= ChargeState.states[:processed] %>
+  created_at: 2014-11-06 09:49:06
+
+state_processing_for_jon:
+  charge: charge_for_jon
+  state: <%= ChargeState.states[:processing] %>
+  created_at: 2014-11-05 09:49:07
+
+state_failed_for_jon:
+  charge: charge_for_jon
+  state: <%= ChargeState.states[:failed] %>
+  created_at: 2014-11-06 09:49:07

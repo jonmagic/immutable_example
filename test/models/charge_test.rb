@@ -25,4 +25,10 @@ class ChargeTest < ActiveSupport::TestCase
       @charge.update(:amount_in_cents => 500)
     end
   end
+
+  test "#states returns history of states for charge in chronological order" do
+    assert_equal \
+      [charge_states(:state_processing_for_julia), charge_states(:state_processed_for_julia)],
+      @charge.states
+  end
 end

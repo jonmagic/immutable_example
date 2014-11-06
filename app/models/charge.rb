@@ -1,5 +1,6 @@
 class Charge < ActiveRecord::Base
   belongs_to :account
+  has_many :states, :class_name => "ChargeState"
 
   scope :all_for_account, ->(account) { where(:account => account) }
 
