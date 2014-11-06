@@ -31,4 +31,8 @@ class ChargeTest < ActiveSupport::TestCase
       [charge_states(:state_processing_for_julia), charge_states(:state_processed_for_julia)],
       @charge.states
   end
+
+  test "#state returns the current (aka last) state" do
+    assert_equal charge_states(:state_processed_for_julia), @charge.state
+  end
 end

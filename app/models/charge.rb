@@ -11,4 +11,8 @@ class Charge < ActiveRecord::Base
   def readonly?
     persisted?
   end
+
+  def state
+    states.last
+  end
 end
