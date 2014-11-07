@@ -36,11 +36,11 @@ class ChargeTest < ActiveSupport::TestCase
     assert_equal charge_states(:state_processed_for_julia), @charge.state
   end
 
-  test ".all_in_progress" do
+  test ".all_in_progress only returns charge that is still in progress" do
     assert_equal [charges(:charge_for_arthur)], Charge.all_in_progress
   end
 
-  test ".all_finalized" do
+  test ".all_finalized only returns charges that have been finalized" do
     assert_equal \
       [charges(:charge_for_julia), charges(:charge_for_jon)],
       Charge.all_finalized
