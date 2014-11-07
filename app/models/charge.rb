@@ -30,7 +30,7 @@ class Charge < ActiveRecord::Base
   end
 
   def processing!
-    states.build(:state => ChargeState.states[:processing])
+    states.build(:state => ChargeState.states[:processing], :created_at => created_at)
   end
 
   def processed!
