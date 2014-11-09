@@ -31,6 +31,16 @@ class Charge < ActiveRecord::Base
     eos
   }
 
+  scope :all_with_state, ->(state) {
+    where <<-eos
+      id in
+        (select cs1.charge_id from charge_states as cs1
+         left join charge_states as cs2
+         on (cs1.charge_id = cs2.charge_id and cs1.created_at < cs2.created_at)
+         where cs2.id is null and cs1.state = #{ChargeState.states[state]})
+    eos
+  }
+
   before_create :processing!
 
   def readonly?

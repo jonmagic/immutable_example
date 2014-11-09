@@ -45,4 +45,10 @@ class ChargeTest < ActiveSupport::TestCase
       [charges(:charge_for_julia), charges(:charge_for_jon)],
       Charge.all_finalized
   end
+
+  test ".all_with_state only returns charges for specific state" do
+    assert_equal [charges(:charge_for_arthur)], Charge.all_with_state(:processing)
+    assert_equal [charges(:charge_for_julia)], Charge.all_with_state(:processed)
+    assert_equal [charges(:charge_for_jon)], Charge.all_with_state(:failed)
+  end
 end
