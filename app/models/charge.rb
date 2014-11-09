@@ -1,6 +1,5 @@
 class Charge < ActiveRecord::Base
   belongs_to :account
-  has_many :states, :class_name => "ChargeState"
   has_many :charge_states
 
   default_scope { order("created_at asc") }
@@ -45,6 +44,10 @@ class Charge < ActiveRecord::Base
 
   def readonly?
     persisted?
+  end
+
+  def states
+    charge_states
   end
 
   def state
