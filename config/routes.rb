@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  resources :accounts do
+  resources :accounts, :except => :show do
     resources :charges, :except => [:edit, :update, :destroy] do
       member do
         post "processed"
