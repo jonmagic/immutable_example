@@ -9,6 +9,10 @@ class ChargeState < ActiveRecord::Base
     :failed     => 2
   }
 
+  def readonly?
+    persisted?
+  end
+
   def self.final_states
     [
       states[:processed],

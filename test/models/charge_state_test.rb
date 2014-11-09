@@ -22,4 +22,12 @@ class ChargeStateTest < ActiveSupport::TestCase
   test "#in_progress? returns false when failed" do
     refute charge_states(:state_failed_for_jon).in_progress?
   end
+
+  test "record is read only after being created" do
+    charge_state = charge_states(:state_processing_for_arthur)
+
+    assert_raises(ActiveRecord::ReadOnlyRecord) do
+      charge_state.update(:state => "processed")
+    end
+  end
 end
